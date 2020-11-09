@@ -9,5 +9,5 @@ eksctl create cluster \
 --nodes-min 1 \
 --nodes-max 4 \
 --managed
-
+echo "K8s Cluster is created"
 eksctl get cluster --name=minipaintCluster
