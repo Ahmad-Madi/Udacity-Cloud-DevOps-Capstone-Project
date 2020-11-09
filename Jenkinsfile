@@ -27,6 +27,7 @@ pipeline {
 
     stage('Push image to Docker Hub') {
       steps {
+        echo 'Pushing image to Docker Hub'
         script {
           docker.withRegistry( '', 'dockerhub_id' ) {
             dockerImage.push()
