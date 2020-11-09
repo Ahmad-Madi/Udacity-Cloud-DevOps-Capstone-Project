@@ -5,7 +5,8 @@ pipeline {
     stage('Install Requirements') {
       steps {
         echo 'Installing hadolint'
-        sh 'bash ./requirements.sh'
+        sh 'sudo apt-get install docker-ce docker-ce-cli containerd.io'
+        sh 'docker pull hadolint/hadolint'
       }
     }
 
