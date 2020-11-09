@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: first
+  name: beta
   labels:
     app: minipaint
     namespace: default
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: minipaint
@@ -21,6 +21,15 @@ spec:
         name: minipaint
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 50%
         
 ---
 apiVersion: v1
