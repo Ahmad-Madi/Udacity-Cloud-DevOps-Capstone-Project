@@ -25,7 +25,7 @@ pipeline {
       }
     }
 
-    stage('Upload Docker image to Docker Hub') {
+    stage('Push image to Docker Hub') {
       steps {
         script {
           docker.withRegistry( '', 'dockerhub_id' ) {
@@ -37,14 +37,12 @@ pipeline {
 
     stage('Deploy') {
       steps {
-        echo 'Deploying to AWS Kubernetes cluster'
+        echo 'Deploy to AWS Kubernetes cluster'
         withAWS(region: 'us-west-2', credentials: 'aws_credentials') {
           echo 'Deploying to EKS cluster'
           sh 'aws eks --region us-west-2 update-kubeconfig --name minipaintCluster'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:204657556734:cluster/minipaintCluster'
           sh 'kubectl apply -f deployment.yml'
-          sh 'kubectl get pods'
-          sh 'kubectl get services'
         }
       }
     }
