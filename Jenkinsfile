@@ -5,7 +5,7 @@ pipeline {
     stage('Install Requirements') {
       steps {
         echo 'Installing hadolint'
-        sh 'sudo ./requirements.sh'
+        sh './requirements.sh'
       }
     }
 
