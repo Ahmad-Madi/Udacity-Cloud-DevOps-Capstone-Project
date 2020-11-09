@@ -18,19 +18,21 @@ pipeline {
 
     stage('Build Docker image') {
       steps {
-        echo 'Building Docker image'
-        sh 'docker build --tag=minipaint .'
+        echo 'Building the Docker container'
+        script {
+          dockerImage = docker.build("sahlmady/minipaint", "-f Dockerfile .")
+        }
       }
     }
 
     stage('Upload Docker image to Docker Hub') {
       steps {
-        echo 'Pushing image to docker hub'
         script {
-          docker.withRegistry( '', 'dockerhub_id') {
+          docker.withRegistry( '', 'dockerhub_id' ) {
             dockerImage.push()
           }
         }
+
       }
     }
 
