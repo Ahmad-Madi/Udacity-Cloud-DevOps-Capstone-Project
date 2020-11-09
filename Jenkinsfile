@@ -18,7 +18,7 @@ pipeline {
 
     stage('Build Docker image') {
       steps {
-        echo 'Building the Docker container'
+        echo 'Building Docker image'
         script {
           dockerImage = docker.build("sahlmady/minipaint", "-f Dockerfile .")
         }
@@ -32,14 +32,13 @@ pipeline {
             dockerImage.push()
           }
         }
-
       }
     }
 
     stage('Deploy') {
       steps {
         echo 'Deploying to AWS Kubernetes cluster'
-        withAWS(region: 'us-west-2') {
+        withAWS(region: 'us-west-2', credentials: 'aws_credentials') {
           echo 'Deploying to EKS cluster'
           sh 'aws eks --region us-west-2 update-kubeconfig --name minipaintCluster'
           sh 'kubectl config use-context arn:aws:eks:us-west-2:204657556734:cluster/minipaintCluster'
@@ -49,6 +48,5 @@ pipeline {
         }
       }
     }
-
   }
 }
