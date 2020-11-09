@@ -16,5 +16,5 @@ In this project, I [cloned](https://github.com/viliusle/miniPaint) an open sourc
   b. Build a Docker container in a pipeline -> Stage #3 in Jenkinsfile ✔  
 
 3. Successful Deployment  
-  a. The Docker container is deployed to a Kubernetes cluster -> deployed and [this](http://a03dd4fa793f44147aa6e50ad095bc1d-1685300544.us-west-2.elb.amazonaws.com/) is the public URL(*temp*) ✔  
+  a. The Docker container is deployed to a Kubernetes cluster -> deployed using eksctl which uses aws cloudformation to create infrastructure and [this](http://a03dd4fa793f44147aa6e50ad095bc1d-1685300544.us-west-2.elb.amazonaws.com/) is the public URL(*temp*) ✔  
   b. Use Blue/Green Deployment or a Rolling Deployment successfully -> used rolling as described in the deployment.yml file ✔
